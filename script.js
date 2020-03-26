@@ -3,6 +3,7 @@
 document.querySelectorAll('.game-board .box').forEach(el => el.addEventListener('click', onClick))
 
 let player = 'X'
+let gameOver = false
 
 function switchPlayer() {
     player = player === 'X' ? 'O' : 'X'
@@ -14,12 +15,19 @@ function getBoard() {
     return board
 }
 
+function endGame() {
+    gameOver = true
+}
+
 function checkEndGame() {
     const board = getBoard()
+    const status = document.querySelector('#status')
     if (isVictory(board)) {
-        alert('winner winner, ' + player)
+        status.textContent = `Player ${player} is victorious`
+        endGame()
     } else if (isCats(board)) {
-        alert('cats game')
+        status.textContent = 'Cats Game!'
+        endGame()
     }
 }
 
@@ -47,6 +55,9 @@ function isVictory(board) {
 }
 
 function onClick() {
+    if (gameOver) {
+        return
+    }
     // get contet of cell
     const marker = this.textContent
 

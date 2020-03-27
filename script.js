@@ -63,7 +63,7 @@ function onClick() {
     if (gameOver) {
         return
     }
-    // get contet of cell
+    // get content of cell
     const marker = this.textContent
 
     if (marker === '') {

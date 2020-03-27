@@ -1,4 +1,3 @@
-
 // add click listeners
 document.querySelectorAll('.game-board .box').forEach(el => el.addEventListener('click', onClick))
 
@@ -36,6 +35,15 @@ function isCats(board) {
 }
 
 function isVictory(board) {
+    // check diag
+    if (
+        (board[0] && board[0] === board[4] && board[4] === board[8]) ||
+        (board[2] && board[2] === board[4] && board[4] === board[6])
+    ) {
+        return true
+    }
+
+    // check rows & cols
     for (let i = 0; i < 3; i++) {
         const row = i * 3;
         const col = i;
@@ -44,10 +52,7 @@ function isVictory(board) {
             // check row
             (board[row] && (board[row] === board[row + 1] && board[row + 1] === board[row + 2])) ||
             // check col
-            (board[col] && (board[col] === board[col + 3] && board[col + 3] === board[col + 6])) ||
-            // check diag
-            (board[0] && board[0] === board[4] && board[4] === board[8]) ||
-            (board[2] && board[2] === board[4] && board[4] === board[6])
+            (board[col] && (board[col] === board[col + 3] && board[col + 3] === board[col + 6]))
         ) {
             return true
         }
